@@ -64,8 +64,8 @@
     "environment": "*"
   },
   "mixin": [
-    "camsbackpacks.mixins.json",
-    "camsbackpacks.quilt.mixins.json"
+    "${mod_id}.mixins.json",
+    "${mod_id}.quilt.mixins.json"
   ],
   "mc-publish": {
     "curseforge": "${curseforge_id}",
