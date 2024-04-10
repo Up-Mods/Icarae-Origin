@@ -1,0 +1,112 @@
+plugins {
+    id 'idea'
+    alias neoforge.plugins.neogradle
+}
+
+def usingJarJar = false
+
+if(usingJarJar) {
+    jarJar.enable()
+}
+
+dependencies {
+    implementation neoforge.neoforge
+    compileOnly project(":Common")
+
+    implementation libs.sparkweave.neoforge
+
+    implementation libs.resourcefulconfig.neoforge
+
+    // compileOnly "${libs.emi.neoforge.get()}:api"
+}
+
+if(usingJarJar) {
+    jar {
+        archiveClassifier.set("slim")
+    }
+
+    tasks.jarJar.configure {
+        archiveClassifier.set('')
+    }
+}
+
+// Automatically enable neoforge AccessTransformers if the file exists
+// This location is hardcoded in FML and can not be changed.
+// https://github.com/neoforged/FancyModLoader/blob/a952595eaaddd571fbc53f43847680b00894e0c1/loader/src/main/java/net/neoforged/fml/loading/moddiscovery/ModFile.java#L118
+if (file('src/main/resources/META-INF/accesstransformer.cfg').exists()) {
+    minecraft.accessTransformers.file file('src/main/resources/META-INF/accesstransformer.cfg')
+}
+
+subsystems {
+    parchment {
+        minecraftVersion = libs.versions.minecraft.get()
+        mappingsVersion = libs.versions.parchment.get()
+    }
+}
+
+runs {
+    configureEach {
+        systemProperty 'forge.logging.markers', 'REGISTRIES'
+        systemProperty 'forge.logging.console.level', 'debug'
+
+        workingDirectory project.file('run')
+
+        modSource project.sourceSets.main
+
+        dependencies {
+            runtime libs.emi.neoforge.get()
+        }
+    }
+    client {
+        systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+
+        if (rootProject.hasProperty('mc_uuid')) {
+            programArguments.addAll "--uuid", rootProject.mc_uuid
+        }
+
+        if (rootProject.hasProperty('mc_username')) {
+            programArguments.addAll "--username", rootProject.mc_username
+        }
+
+        if (rootProject.hasProperty('mc_java_agent_path')) {
+            jvmArgument("-javaagent:${rootProject.mc_java_agent_path}")
+        }
+    }
+
+    server {
+        programArguments.add('nogui')
+        systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+    }
+
+    data {
+        programArguments.addAll('--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').absolutePath, '--existing', file('src/main/resources/').absolutePath)
+    }
+}
+
+sourceSets.main.resources { srcDir 'src/generated/resources' }
+
+tasks.named("compileJava", JavaCompile) {
+    source(project(":Common").sourceSets.main.allJava)
+}
+
+tasks.named("javadoc", Javadoc) {
+    source(project(":Common").sourceSets.main.allJava)
+}
+
+tasks.named("sourcesJar", Jar) {
+    from(project(":Common").sourceSets.main.allSource)
+}
+
+processResources {
+    from project(":Common").sourceSets.main.resources
+}
+
+if(usingJarJar) {
+    publishing {
+        publications {
+            "mavenJava${project.name}"(MavenPublication) {
+                jarJar.component(it)
+            }
+        }
+    }
+}
