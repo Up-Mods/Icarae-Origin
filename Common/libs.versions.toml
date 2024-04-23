@@ -11,7 +11,7 @@ jetbrains_annotations = "24.1.0"
 vanilla_gradle = "0.2.1-SNAPSHOT"
 
 emi = "1.1.4+1.20.1"
-icarus = "1.20.1-development+20240423162154" # "2.5.0"
+icarus = "2.6.0"
 
 [libraries]
 minecraft = { module = "com.mojang:minecraft", version.ref = "minecraft" }
