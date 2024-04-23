@@ -36,9 +36,12 @@ dependencyResolutionManagement {
         neoforge {
             from(files("./NeoForge/libs.versions.toml"))
         }
+        fabric {
+            from(files("./Fabric/libs.versions.toml"))
+        }
     }
 }
 
-rootProject.name = 'ExampleMod'
+rootProject.name = 'Icarae-Origin'
 
-include 'Common', 'NeoForge', 'Quilt'
+include 'Common', 'NeoForge', 'Quilt', 'Fabric'

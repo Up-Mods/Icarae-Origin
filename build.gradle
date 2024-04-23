@@ -10,7 +10,7 @@ def javaVersion = 17
 group = maven_group_id
 
 def ENV = System.getenv()
-def NOW = new Date();
+def NOW = new Date()
 def buildTime = ENV.BUILD_TIME ?: NOW.format('yyyyMMddHHmmss')
 
 boolean isPreviewBuild = !ENV.TAG || ENV.TAG.matches(".+-.+")
@@ -70,6 +70,7 @@ subprojects {
 
 	repositories {
 		mavenCentral()
+        mavenLocal()
 
 		maven {
 			name = "Sponge"
@@ -98,8 +99,8 @@ subprojects {
 		}
 
 		maven {
-			name = 'NeoForge'
-			url = 'https://maven.neoforged.net/releases'
+			name = "NeoForge"
+			url = "https://maven.neoforged.net/releases"
 		}
 
 		maven {
@@ -108,18 +109,59 @@ subprojects {
 		}
 
 		maven {
+			name = "Ladysnake"
+			url = "https://maven.ladysnake.org/releases"
+		}
+
+		maven {
+			name = "Greenouse Team"
+			url = "https://maven.greenhouseteam.dev/releases"
+		}
+
+		maven {
 			name = "TeamResourceful"
 			url = "https://maven.teamresourceful.com/repository/maven-releases"
 		}
 
 		maven {
-			name "TerraformersMC"
-			url "https://maven.terraformersmc.com/releases"
+			name = "JourneyMap"
+			url = "https://jm.gserv.me/repository/maven-public"
 		}
 
 		maven {
-			name "Modrinth"
-			url "https://api.modrinth.com/maven"
+			name = "TerraformersMC"
+			url = "https://maven.terraformersmc.com/releases"
+		}
+
+		maven {
+			name = "Shedaniel"
+			url = "https://maven.shedaniel.me"
+		}
+
+		maven {
+			name = "Cafeteria"
+			url = "https://maven.cafeteria.dev"
+			content {
+				includeGroup "net.adriantodt.fabricmc"
+			}
+		}
+
+		maven {
+			name = "JamiesWhiteShirt"
+			url = "https://maven.jamieswhiteshirt.com/libs-release"
+			content {
+				includeGroup "com.jamieswhiteshirt"
+			}
+		}
+
+		maven {
+			name = "TheIllusiveC4"
+			url = "https://maven.theillusivec4.top"
+		}
+
+		maven {
+			name = "Modrinth"
+			url = "https://api.modrinth.com/maven"
 			content {
 				includeGroup "maven.modrinth"
 			}
@@ -132,6 +174,11 @@ subprojects {
                 includeGroup "curse.maven"
             }
         }
+
+		maven {
+			name = "JitPack"
+			url = "https://jitpack.io"
+		}
 	}
 
 	tasks.withType(JavaCompile).configureEach {
@@ -158,6 +205,7 @@ subprojects {
 			"modrinth_id"					: modrinth_id,
 
 			"quilt_loader_version"          : quilt.versions.quilt.loader.get(),
+			"fabric_loader_version"         : fabric.versions.fabric.loader.get(),
 		]
 
 		filesMatching(['pack.mcmeta', '*.mod.json', 'META-INF/mods.toml', '*.mixins.json']) {

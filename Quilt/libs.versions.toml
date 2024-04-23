@@ -1,11 +1,20 @@
 [versions]
 # The latest versions are available at https://lambdaurora.dev/tools/import_quilt.html
-quilt_loom = "1.6.+"
+quilt_loom = "1.5.7"
 
 quilt_loader = "0.24.0"
-quilted_fabric_api = "9.0.0-alpha.7+0.96.11-1.20.4"
+quilted_fabric_api = "7.5.0+0.91.0-1.20.1"
 
-modmenu = "9.1.0-beta.1"
+origins = "v1.10.0"
+apoli = "v2.9.0"
+calio = "v1.11.0"
+additional_entity_attributes = "89b98f4"
+reach_entity_attributes = "2.4.0"
+playerabilitylib = "1.8.0"
+cloth = "11.1.118"
+cca = "5.2.2"
+
+modmenu = "7.2.2"
 
 [libraries]
 quilt_loader = { module = "org.quiltmc:quilt-loader", version.ref = "quilt_loader" }
@@ -13,11 +22,22 @@ quilt_loader = { module = "org.quiltmc:quilt-loader", version.ref = "quilt_loade
 quilted_fabric_api = { module = "org.quiltmc.quilted-fabric-api:quilted-fabric-api", version.ref = "quilted_fabric_api" }
 quilted_fabric_api_deprecated = { module = "org.quiltmc.quilted-fabric-api:quilted-fabric-api-deprecated", version.ref = "quilted_fabric_api" }
 
+origins = { module = "com.github.apace100:origins-fabric", version.ref = "origins" }
+apoli = { module = "com.github.apace100:apoli", version.ref = "apoli" }
+calio = { module = "com.github.apace100:calio", version.ref = "calio" }
+additional_entity_attributes = { module = "com.github.DaFuqs:AdditionalEntityAttributes", version.ref = "additional_entity_attributes" }
+reach_entity_attributes = { module = "com.jamieswhiteshirt:reach-entity-attributes", version.ref = "reach_entity_attributes" }
+playerabilitylib = { module = "io.github.ladysnake:PlayerAbilityLib", version.ref = "playerabilitylib" }
+cloth = { module = "me.shedaniel.cloth:cloth-config-fabric", version.ref = "cloth" }
+cca-base = { module = "dev.onyxstudios.cardinal-components-api:cardinal-components-base", version.ref = "cca" }
+cca-entity = { module = "dev.onyxstudios.cardinal-components-api:cardinal-components-entity", version.ref = "cca" }
+
 modmenu = { module = "com.terraformersmc:modmenu", version.ref = "modmenu" }
 
 # If you have multiple similar dependencies, you can declare a dependency bundle and reference it on the build script with "libs.bundles.example".
 [bundles]
 quilted_fabric_api = ["quilted_fabric_api", "quilted_fabric_api_deprecated"]
+origins = ["origins", "apoli", "calio", "additional_entity_attributes", "reach_entity_attributes", "playerabilitylib", "cloth", "cca-base", "cca-entity"]
 
 [plugins]
 quilt_loom = { id = "org.quiltmc.loom", version.ref = "quilt_loom" }

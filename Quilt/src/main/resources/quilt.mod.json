@@ -8,7 +8,8 @@
       "name": "${mod_display_name}",
       "description": "${mod_description}",
       "contributors": {
-        "Up": "Owner"
+        "Up": "Owner",
+        "Cammie": "Former Author"
       },
       "contact": {
         "homepage": "${homepage_url}",
@@ -23,8 +24,7 @@
       "icon": "icon.png"
     },
     "entrypoints": {
-      "init": "dev.upcraft.examplemod.quilt.entrypoints.Main",
-      "client_init": "dev.upcraft.examplemod.quilt.entrypoints.Client"
+      "init": "dev.upcraft.origins.icarae.quilt.entrypoints.Main"
     },
     "depends": [
       {
@@ -43,35 +43,36 @@
         "versions": "=${minecraft_version}"
       },
       {
-        "id": "sparkweave",
+        "id": "icarus",
         "mc-publish": {
-          "curseforge": "911456",
-          "modrinth": "nf68xfAw"
+          "curseforge": "428151",
+          "modrinth": "Dw7M6XKW"
         }
       },
       {
-        "id": "resourcefulconfig",
+        "id": "origins",
         "mc-publish": {
-          "curseforge": "714059",
-          "modrinth": "M1953qlQ"
+          "curseforge": "391943",
+          "modrinth": "3BeIrqZR"
         }
       }
     ],
     "intermediate_mappings": "net.fabricmc:intermediary"
   },
-  "access_widener": "${mod_id}.accesswidener",
   "minecraft": {
     "environment": "*"
   },
   "mixin": [
-    "camsbackpacks.mixins.json",
-    "camsbackpacks.quilt.mixins.json"
+    "${mod_id}.mixins.json",
+    "${mod_id}.quilt.mixins.json"
   ],
   "mc-publish": {
     "curseforge": "${curseforge_id}",
     "modrinth": "${modrinth_id}",
     "loaders": [
       "quilt"
+    ],
+    "dependencies": [
     ]
   }
 }

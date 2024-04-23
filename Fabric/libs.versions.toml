@@ -1,0 +1,39 @@
+[versions]
+# The latest versions are available at https://fabricmc.net/develop/
+
+fabric_loader = "0.15.9"
+fabric_api = "0.92.1+1.20.1"
+
+origins = "v1.10.0"
+apoli = "v2.9.0"
+calio = "v1.11.0"
+additional_entity_attributes = "89b98f4"
+reach_entity_attributes = "2.4.0"
+playerabilitylib = "1.8.0"
+cloth = "11.1.118"
+cca = "5.2.2"
+
+modmenu = "7.2.2"
+
+[libraries]
+fabric_loader = { module = "net.fabricmc:fabric-loader", version.ref = "fabric_loader" }
+
+fabric_api = { module = "net.fabricmc.fabric-api:fabric-api", version.ref = "fabric_api" }
+
+origins = { module = "com.github.apace100:origins-fabric", version.ref = "origins" }
+apoli = { module = "com.github.apace100:apoli", version.ref = "apoli" }
+calio = { module = "com.github.apace100:calio", version.ref = "calio" }
+additional_entity_attributes = { module = "com.github.DaFuqs:AdditionalEntityAttributes", version.ref = "additional_entity_attributes" }
+reach_entity_attributes = { module = "com.jamieswhiteshirt:reach-entity-attributes", version.ref = "reach_entity_attributes" }
+playerabilitylib = { module = "io.github.ladysnake:PlayerAbilityLib", version.ref = "playerabilitylib" }
+cloth = { module = "me.shedaniel.cloth:cloth-config-fabric", version.ref = "cloth" }
+cca-base = { module = "dev.onyxstudios.cardinal-components-api:cardinal-components-base", version.ref = "cca" }
+cca-entity = { module = "dev.onyxstudios.cardinal-components-api:cardinal-components-entity", version.ref = "cca" }
+
+modmenu = { module = "com.terraformersmc:modmenu", version.ref = "modmenu" }
+
+# If you have multiple similar dependencies, you can declare a dependency bundle and reference it on the build script with "libs.bundles.example".
+[bundles]
+origins = ["origins", "apoli", "calio", "additional_entity_attributes", "reach_entity_attributes", "playerabilitylib", "cloth", "cca-base", "cca-entity"]
+
+# [plugins]

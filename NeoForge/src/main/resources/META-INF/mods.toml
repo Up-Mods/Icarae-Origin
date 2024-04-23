@@ -10,7 +10,7 @@ displayName = "${mod_display_name}" #mandatory
 displayURL = "${homepage_url}" #optional (displayed in the mod UI)
 logoFile = "icon.png" #optional
 #credits = "" #optional
-authors = "Up" #optional
+authors = "Up, Cammie" #optional
 description = '''${mod_description}''' #mandatory (Supports multiline text)
 
 [[mixins]]
@@ -22,10 +22,10 @@ config = "${mod_id}.neoforge.mixins.json"
 # https://docs.neoforged.net/docs/gettingstarted/modfiles#dependency-configurations
 [dependencies]
     "${mod_id}" = [
-        { modId = "neoforge", type = "required", versionRange = "*", ordering = "NONE", side = "BOTH", mc-publish = { ignore = true } },
-        { modId = "minecraft", type = "required", versionRange = "[${minecraft_version}]", ordering = "NONE", side = "BOTH" },
-        { modId = "sparkweave", type = "required", versionRange = "*", ordering = "NONE", side = "BOTH", mc-publish = { curseforge = "911456", modrinth = "nf68xfAw" } },
-        { modId = "resourcefulconfig", type = "required", versionRange = "*", ordering = "NONE", side = "BOTH", mc-publish = { curseforge = "714059", modrinth = "M1953qlQ" } },
+        { modId = "forge", mandatory = true, versionRange = "*", ordering = "NONE", side = "BOTH", mc-publish = { ignore = true } },
+        { modId = "minecraft", mandatory = true, versionRange = "[${minecraft_version}]", ordering = "NONE", side = "BOTH" },
+        { modId = "icarus", mandatory = true, versionRange = "*", ordering = "NONE", side = "BOTH", mc-publish = { curseforge = "428151", modrinth = "Dw7M6XKW" } },
+        { modId = "origins", mandatory = true, versionRange = "*", ordering = "NONE", side = "BOTH", mc-publish = { curseforge = "474438", modrinth = "jl3m2lR9" } }
     ]
 
 # Features are specific properties of the game environment, that you may want to declare you require. This example declares
@@ -37,4 +37,9 @@ config = "${mod_id}.neoforge.mixins.json"
 [mc-publish]
     curseforge = "${curseforge_id}"
     modrinth = "${modrinth_id}"
-    loaders = ["neoforge"]
+    loaders = [
+        "neoforge",
+        "forge"
+    ]
+    dependencies = [
+    ]

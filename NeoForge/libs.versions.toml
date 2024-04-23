@@ -1,10 +1,41 @@
 [versions]
-neogradle = "7.+"
+neogradle = "6.+"
+mixingradle = "0.7.+"
+librarian = "1.+"
 
-neoforge = "20.4.221"
+neoforge = "1.20.1-47.1.104"
+
+resourcefulconfig = "2.1.2"
+
+commonnetworking = "1.0.3-1.20.1"
+
+curios = "5.8.1+1.20.1"
+
+caelus = "3.2.0+1.20.1"
+
+origins = "1.20.1-1.10.0.6"
+apoli = "1.20.1-2.9.0.5"
+calio = "1.20.1-1.11.0.3"
 
 [libraries]
-neoforge = { module = "net.neoforged:neoforge", version.ref = "neoforge" }
+neoforge = { module = "net.neoforged:forge", version.ref = "neoforge" }
+
+resourcefulconfig = { module = "com.teamresourceful.resourcefulconfig:resourcefulconfig-forge-1.20.1", version.ref = "resourcefulconfig" }
+
+commonnetworking = { module = "mysticdrew:common-networking-neoforge", version.ref = "commonnetworking" }
+
+curios = { module = "top.theillusivec4.curios:curios-forge", version.ref = "curios" }
+
+caelus = { module = "top.theillusivec4.caelus:caelus-forge", version.ref = "caelus" }
+
+origins = { module = "io.github.edwinmindcraft:origins-forge", version.ref = "origins" }
+apoli = { module = "io.github.edwinmindcraft:apoli-forge", version.ref = "apoli" }
+calio = { module = "io.github.edwinmindcraft:calio-forge", version.ref = "calio" }
+
+[bundles]
+origins = ["origins", "apoli", "calio"]
 
 [plugins]
-neogradle = { id = "net.neoforged.gradle.userdev", version.ref = "neogradle" }
+neogradle = { id = "net.neoforged.gradle", version.ref = "neogradle" }
+mixingradle = { id = "org.spongepowered.mixin", version.ref = "mixingradle" }
+librarian = { id = "org.parchmentmc.librarian.forgegradle", version.ref = "librarian" }
