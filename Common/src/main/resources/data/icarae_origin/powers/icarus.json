@@ -6,18 +6,14 @@
     "type": "origins:and",
     "conditions": [
       {
-        "condition": {
-          "type": "origins:fall_flying"
-        }
+        "type": "origins:fall_flying"
       },
       {
-        "condition": {
-          "type": "origins:block_collision",
-          "block_condition": {
-            "type": "origins:height",
-            "comparison": ">",
-            "compare_to": 288
-          }
+        "type": "origins:block_collision",
+        "block_condition": {
+          "type": "origins:height",
+          "comparison": ">",
+          "compare_to": 288
         }
       }
     ]

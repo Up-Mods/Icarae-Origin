@@ -14,19 +14,10 @@
     "type": "origins:or",
     "conditions": [
       {
-        "condition": {
-          "type": "origins:on_fire"
-        }
+        "type": "origins:on_fire"
       },
       {
-        "condition": {
-          "type": "icarae_origin:wet"
-        }
-      },
-      {
-        "condition": {
-          "type": "origins:in_thunderstorm"
-        }
+        "type": "icarae_origin:wet"
       }
     ]
   }
