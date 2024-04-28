@@ -1,0 +1,25 @@
+{
+  "type": "origins:burn",
+  "interval": 20,
+  "burn_duration": 120,
+  "condition": {
+    "type": "origins:and",
+    "conditions": [
+      {
+        "condition": {
+          "type": "origins:fall_flying"
+        }
+      },
+      {
+        "condition": {
+          "type": "origins:block_collision",
+          "block_condition": {
+            "type": "origins:height",
+            "comparison": ">",
+            "compare_to": 288
+          }
+        }
+      }
+    ]
+  }
+}

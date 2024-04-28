@@ -2,8 +2,9 @@
   "powers": [
     "icarae_origin:wings",
     "origins:aerial_combatant",
+    "icarae_origin:icarus",
     "icarae_origin:hollow_bones",
-    "origins:no_shield",
+    "icarae_origin:flimsy",
     "origins:carnivore"
   ],
   "icon": "icarus:white_feathered_wings",
