@@ -4,5 +4,9 @@
   "power.icarae_origin.wings.name": "Wings!",
   "power.icarae_origin.wings.description": "Thanks to your wings, you are capable of powered flight at low-altitudes.\n\nOf course you need to be light-weight to fly fast, so heavy armor slows you down significantly.",
   "power.icarae_origin.hollow_bones.name": "Hollow Bones",
-  "power.icarae_origin.hollow_bones.description": "In order to fly, Icarae had to evolve a hollow bone structure, similar to birds.\n\nThis causes them to be much more vulnerable to damage."
+  "power.icarae_origin.hollow_bones.description": "In order to fly, Icarae had to evolve a hollow bone structure, similar to birds.\n\nThis causes them to be much more vulnerable to damage.",
+  "power.icarae_origin.icarus.name": "Icarus",
+  "power.icarae_origin.icarus.description": "Flying too close to the sun will result in your wings burning up.",
+  "power.icarae_origin.flimsy.name": "Flimsy",
+  "power.icarae_origin.flimsy.description": "If you get wet or are set on fire, your wings will be unable to work for a short period of time."
 }
