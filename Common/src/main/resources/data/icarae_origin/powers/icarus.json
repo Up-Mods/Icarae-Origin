@@ -15,6 +15,9 @@
           "comparison": ">",
           "compare_to": 288
         }
+      },
+      {
+        "type": "origins:exposed_to_sun"
       }
     ]
   }
