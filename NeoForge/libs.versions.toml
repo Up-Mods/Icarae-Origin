@@ -9,13 +9,13 @@ resourcefulconfig = "2.1.2"
 
 commonnetworking = "1.0.3-1.20.1"
 
-curios = "5.8.1+1.20.1"
+curios = "5.9.0+1.20.1"
 
 caelus = "3.2.0+1.20.1"
 
-origins = "1.20.1-1.10.0.6"
-apoli = "1.20.1-2.9.0.5"
-calio = "1.20.1-1.11.0.3"
+origins = "1.20.1-1.10.0.9"
+apoli = "1.20.1-2.9.0.8"
+calio = "1.20.1-1.11.0.5"
 
 [libraries]
 neoforge = { module = "net.neoforged:forge", version.ref = "neoforge" }
