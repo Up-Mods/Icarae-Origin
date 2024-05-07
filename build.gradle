@@ -174,11 +174,6 @@ subprojects {
                 includeGroup "curse.maven"
             }
         }
-
-		maven {
-			name = "JitPack"
-			url = "https://jitpack.io"
-		}
 	}
 
 	tasks.withType(JavaCompile).configureEach {
