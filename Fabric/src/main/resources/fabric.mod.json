@@ -22,13 +22,13 @@
     ]
   },
   "mixins": [
-    "${mod_id}.mixins.json",
     "${mod_id}.fabric.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=${fabric_loader_version}",
     "fabric-api": "*",
     "minecraft": "=${minecraft_version}",
+    "java": ">=${java_version}",
     "icarus": "*",
     "origins": "*"
   },
@@ -37,7 +37,8 @@
       "curseforge": "${curseforge_id}",
       "modrinth": "${modrinth_id}",
       "loaders": [
-        "fabric"
+        "fabric",
+        "quilt"
       ],
       "dependencies": [
         "fabric-api(required){modrinth:P7dR8mSH}{curseforge:306612}",

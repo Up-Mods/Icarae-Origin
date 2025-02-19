@@ -1,7 +1,5 @@
 plugins {
     id 'idea'
-	// Required for NeoGradle
-	id "org.jetbrains.gradle.plugin.idea-ext" version "1.1.7"
     id 'maven-publish'
 }
 
@@ -17,8 +15,6 @@ boolean isPreviewBuild = !ENV.TAG || ENV.TAG.matches(".+-.+")
 def buildNumber = !ENV.TAG ? ("${ENV.BUILD_NUMBER ? "build.${ENV.BUILD_NUMBER}" : buildTime}") : ""
 version = (ENV.TAG ?: "${libs.versions.minecraft.get()}-development") + ((isPreviewBuild && !ENV.TAG) ? "+${buildNumber}" : "")
 
-def mod_name = rootProject.name.replaceAll("-", "_").toLowerCase(Locale.ROOT)
-
 println("Building ${project.name} ${version}")
 
 subprojects {
@@ -29,7 +25,6 @@ subprojects {
     java {
         toolchain {
             languageVersion = JavaLanguageVersion.of(javaVersion)
-            vendor = JvmVendorSpec.MICROSOFT
         }
         withSourcesJar()
 //        withJavadocJar()
@@ -45,7 +40,7 @@ subprojects {
 
 	jar {
 		from(rootProject.file("LICENSE.md")) {
-			rename { "LICENSE_${mod_name}.md" }
+			rename "LICENSE.md", "LICENSE_${mod_id}.md"
 		}
 		manifest {
 			attributes([
@@ -64,13 +59,12 @@ subprojects {
 
 	sourcesJar {
 		from(rootProject.file("LICENSE.md")) {
-			rename { "LICENSE_${mod_name}.md" }
+			rename "LICENSE.md", "LICENSE_${mod_id}.md"
 		}
 	}
 
 	repositories {
 		mavenCentral()
-        mavenLocal()
 
 		maven {
 			name = "Sponge"
@@ -84,23 +78,13 @@ subprojects {
 			name = "ParchmentMC"
 			url = "https://maven.parchmentmc.org"
 			content {
-				includeGroupByRegex "org\\.parchmentmc(\\..*)?"
+				includeGroupAndSubgroups "org.parchmentmc"
 			}
-		}
-
-		maven {
-			name = "Quilt"
-			url = "https://maven.quiltmc.org/repository/release"
 		}
 
 		maven {
 			name = "Fabric"
 			url = "https://maven.fabricmc.net"
-		}
-
-		maven {
-			name = "NeoForge"
-			url = "https://maven.neoforged.net/releases"
 		}
 
 		maven {
@@ -159,21 +143,31 @@ subprojects {
 			url = "https://maven.theillusivec4.top"
 		}
 
-		maven {
-			name = "Modrinth"
-			url = "https://api.modrinth.com/maven"
-			content {
+		exclusiveContent {
+			forRepository {
+				maven {
+					name = "Modrinth"
+					url = "https://api.modrinth.com/maven"
+				}
+			}
+
+			filter {
 				includeGroup "maven.modrinth"
 			}
 		}
 
-        maven {
-            name = "CurseMaven"
-            url = "https://www.cursemaven.com"
-            content {
-                includeGroup "curse.maven"
-            }
-        }
+		exclusiveContent {
+			forRepository {
+				maven {
+					name = "CurseMaven"
+					url = "https://www.cursemaven.com"
+				}
+			}
+
+			filter {
+				includeGroup "curse.maven"
+			}
+		}
 	}
 
 	tasks.withType(JavaCompile).configureEach {
@@ -199,7 +193,7 @@ subprojects {
 			"curseforge_id"					: curseforge_id,
 			"modrinth_id"					: modrinth_id,
 
-			"quilt_loader_version"          : quilt.versions.quilt.loader.get(),
+			"java_version"                  : javaVersion,
 			"fabric_loader_version"         : fabric.versions.fabric.loader.get(),
 		]
 
@@ -207,13 +201,6 @@ subprojects {
 			expand expandProps
 		}
 		inputs.properties(expandProps)
-	}
-
-	// Disables Gradle's custom module metadata from being published to maven. The
-	// metadata includes mapped dependencies which are not reasonably consumable by
-	// other mod developers.
-	tasks.withType(GenerateModuleMetadata).configureEach {
-		enabled = false
 	}
 
     publishing {
@@ -238,4 +225,12 @@ publishing {
             }
         }
     }
+}
+
+// IDEA no longer automatically downloads sources/javadoc jars for dependencies, so we need to explicitly enable the behavior.
+idea {
+	module {
+		downloadSources = true
+		downloadJavadoc = true
+	}
 }

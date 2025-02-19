@@ -1,8 +1,9 @@
 [versions]
 # The latest versions are available at https://fabricmc.net/develop/
+loom = "1.10.1"
 
-fabric_loader = "0.15.9"
-fabric_api = "0.92.1+1.20.1"
+fabric_loader = "0.16.10"
+fabric_api = "0.92.3+1.20.1"
 
 origins = "v1.10.0"
 apoli = "v2.9.0"
@@ -11,7 +12,7 @@ additional_entity_attributes = "89b98f4"
 reach_entity_attributes = "2.4.0"
 playerabilitylib = "1.8.0"
 cloth = "11.1.118"
-cca = "5.2.2"
+cca = "5.2.3"
 
 modmenu = "7.2.2"
 
@@ -36,4 +37,5 @@ modmenu = { module = "com.terraformersmc:modmenu", version.ref = "modmenu" }
 [bundles]
 origins = ["origins", "apoli", "calio", "additional_entity_attributes", "reach_entity_attributes", "playerabilitylib", "cloth", "cca-base", "cca-entity"]
 
-# [plugins]
+[plugins]
+loom = { id = "fabric-loom", version.ref = "loom" }

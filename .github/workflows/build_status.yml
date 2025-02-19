@@ -2,26 +2,30 @@ name: Build Status
 
 on:
   push:
+    branches: [ '*' ]
   pull_request:
+
+env:
+  JAVA_VERSION: 21
+  GRADLE_BUILD_CACHE_USER: ${{ secrets.GRADLE_BUILD_CACHE_USER }}
+  GRADLE_BUILD_CACHE_TOKEN: ${{ secrets.GRADLE_BUILD_CACHE_TOKEN }}
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Set up JDK 17
+      - name: Set up JDK ${{ env.JAVA_VERSION }}
         uses: actions/setup-java@v4
         with:
           distribution: 'microsoft'
-          java-version: 17
-          cache: 'gradle'
+          java-version: ${{ env.JAVA_VERSION }}
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
       - name: Grant execute permission for gradlew
         run: chmod +x ./gradlew
       - name: Build with Gradle
         run: ./gradlew build --rerun-tasks
-        env:
-          GRADLE_BUILD_CACHE_USER: ${{ secrets.GRADLE_BUILD_CACHE_USER }}
-          GRADLE_BUILD_CACHE_TOKEN: ${{ secrets.GRADLE_BUILD_CACHE_TOKEN }}
       - name: Upload build artifacts (Common)
         continue-on-error: true
         uses: actions/upload-artifact@v4
@@ -30,22 +34,16 @@ jobs:
           path: |
             Common/build/libs/*.jar
             !Common/build/libs/*-dev.jar
-      - name: Upload build artifacts (NeoForge)
+      - name: Upload build artifacts (Forge)
         continue-on-error: true
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ github.event.repository.name }}-NeoForge-${{ github.sha }}
+          name: ${{ github.event.repository.name }}-Forge-${{ github.sha }}
           path: |
-            NeoForge/build/libs/*.jar
-            !NeoForge/build/libs/*-dev.jar
+            Forge/build/libs/*.jar
+            !Forge/build/libs/*-dev.jar
       - name: Upload build artifacts (Quilt)
         continue-on-error: true
-        uses: actions/upload-artifact@v4
-        with:
-          name: ${{ github.event.repository.name }}-Quilt-${{ github.sha }}
-          path: |
-            Quilt/build/libs/*.jar
-            !Quilt/build/libs/*-dev.jar
       - name: Upload build artifacts (Fabric)
         continue-on-error: true
         uses: actions/upload-artifact@v4
