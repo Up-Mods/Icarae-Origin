@@ -58,8 +58,8 @@ jobs:
           curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
           version: ${{ github.ref_name }}+Forge
           files: |
-            NeoForge/build/libs/!(*-@(dev|sources|javadoc|slim)).jar
-            NeoForge/build/libs/*-@(sources|javadoc).jar
+            Forge/build/libs/!(*-@(dev|sources|javadoc|slim)).jar
+            Forge/build/libs/*-@(sources|javadoc).jar
       - name: Publish (Fabric)
         id: publish_fabric
         continue-on-error: true
