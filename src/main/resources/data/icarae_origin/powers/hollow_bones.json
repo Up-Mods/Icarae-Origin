@@ -1,0 +1,10 @@
+{
+  "type": "origins:attribute",
+  "modifier": {
+    "id": "icarae_origin:hollow_bones",
+    "name": "Origin modifier",
+    "attribute": "minecraft:generic.max_health",
+    "amount": -6,
+    "operation": "add_value"
+  }
+}

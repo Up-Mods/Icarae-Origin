@@ -1,9 +1,10 @@
 plugins {
     id 'idea'
     id 'maven-publish'
+    alias libs.plugins.loom
 }
 
-def javaVersion = 17
+def javaVersion = 21
 
 group = maven_group_id
 
@@ -17,203 +18,247 @@ version = (ENV.TAG ?: "${libs.versions.minecraft.get()}-development") + ((isPrev
 
 println("Building ${project.name} ${version}")
 
-subprojects {
-	apply plugin: 'java'
-	project.group = rootProject.group
-	project.version = rootProject.version
+repositories {
+    mavenCentral()
 
-    java {
-        toolchain {
-            languageVersion = JavaLanguageVersion.of(javaVersion)
+    maven {
+        name = "ParchmentMC"
+        url = "https://maven.parchmentmc.org"
+        content {
+            includeGroupAndSubgroups "org.parchmentmc"
         }
-        withSourcesJar()
-//        withJavadocJar()
     }
 
-	javadoc {
-		options.tags = ["reason"]
-	}
+    maven {
+        name = "QuiltMC"
+        url = "https://maven.quiltmc.org/repository/release"
 
-    base {
-	    archivesName = "${rootProject.name}-${project.name}"
+        content {
+            includeGroupAndSubgroups("org.quiltmc")
+        }
     }
 
-	jar {
-		from(rootProject.file("LICENSE.md")) {
-			rename "LICENSE.md", "LICENSE_${mod_id}.md"
-		}
-		manifest {
-			attributes([
-				'Specification-Title'       : rootProject.name,
-				'Specification-Version'     : project.version,
-				'Implementation-Title'      : "${rootProject.name}-${project.name}",
-                'Maven-Artifact'            : "${maven_group_id}:${rootProject.name}-${project.name}:${project.version}",
-				'Implementation-Version'    : project.version,
-				'Implementation-Timestamp'  : NOW.format("yyyy-MM-dd'T'HH:mm:ssZ"),
-				'Timestamp'                 : NOW.toInstant().toEpochMilli(),
-				'Built-On-Java'             : "${System.getProperty('java.vm.version')} (${System.getProperty('java.vm.vendor')})",
-				'Built-On-Minecraft'        : libs.versions.minecraft.get()
-			])
-		}
-	}
+    maven {
+        name = "Up-Mods"
+        url = "https://maven.uuid.gg/releases"
+    }
 
-	sourcesJar {
-		from(rootProject.file("LICENSE.md")) {
-			rename "LICENSE.md", "LICENSE_${mod_id}.md"
-		}
-	}
+    maven {
+        name = "Ladysnake"
+        url = "https://maven.ladysnake.org/releases"
+    }
 
-	repositories {
-		mavenCentral()
+    maven {
+        name = "Ladysnake (snapshots)"
+        url = "https://maven.ladysnake.org/snapshots"
+    }
 
-		maven {
-			name = "Sponge"
-			url = "https://repo.spongepowered.org/repository/maven-public"
-			content {
-				includeGroup "org.spongepowered"
-			}
-		}
+    maven {
+        name = "TeamResourceful"
+        url = "https://maven.teamresourceful.com/repository/maven-releases"
+    }
 
-		maven {
-			name = "ParchmentMC"
-			url = "https://maven.parchmentmc.org"
-			content {
-				includeGroupAndSubgroups "org.parchmentmc"
-			}
-		}
+    maven {
+        name = "JourneyMap"
+        url = "https://jm.gserv.me/repository/maven-public"
+    }
 
-		maven {
-			name = "Fabric"
-			url = "https://maven.fabricmc.net"
-		}
+    maven {
+        name = "TerraformersMC"
+        url = "https://maven.terraformersmc.com/releases"
+    }
 
-		maven {
-			name = "Up-Mods"
-			url = "https://maven.uuid.gg/releases"
-		}
+    maven {
+        name = "Shedaniel"
+        url = "https://maven.shedaniel.me"
+    }
 
-		maven {
-			name = "Ladysnake"
-			url = "https://maven.ladysnake.org/releases"
-		}
+    maven {
+        name = "TheIllusiveC4"
+        url = "https://maven.theillusivec4.top"
+    }
 
-		maven {
-			name = "Greenouse Team"
-			url = "https://maven.greenhouseteam.dev/releases"
-		}
+    maven {
+        name = "Masa"
+        url = "https://masa.dy.fi/maven"
+    }
 
-		maven {
-			name = "TeamResourceful"
-			url = "https://maven.teamresourceful.com/repository/maven-releases"
-		}
+    exclusiveContent {
+        forRepository {
+            maven {
+                name = "Modrinth"
+                url = "https://api.modrinth.com/maven"
+            }
+        }
 
-		maven {
-			name = "JourneyMap"
-			url = "https://jm.gserv.me/repository/maven-public"
-		}
+        filter {
+            includeGroup "maven.modrinth"
+        }
+    }
 
-		maven {
-			name = "TerraformersMC"
-			url = "https://maven.terraformersmc.com/releases"
-		}
+    exclusiveContent {
+        forRepository {
+            maven {
+                name = "CurseMaven"
+                url = "https://www.cursemaven.com"
+            }
+        }
 
-		maven {
-			name = "Shedaniel"
-			url = "https://maven.shedaniel.me"
-		}
-
-		maven {
-			name = "Cafeteria"
-			url = "https://maven.cafeteria.dev"
-			content {
-				includeGroup "net.adriantodt.fabricmc"
-			}
-		}
-
-		maven {
-			name = "JamiesWhiteShirt"
-			url = "https://maven.jamieswhiteshirt.com/libs-release"
-			content {
-				includeGroup "com.jamieswhiteshirt"
-			}
-		}
-
-		maven {
-			name = "TheIllusiveC4"
-			url = "https://maven.theillusivec4.top"
-		}
-
-		exclusiveContent {
-			forRepository {
-				maven {
-					name = "Modrinth"
-					url = "https://api.modrinth.com/maven"
-				}
-			}
-
-			filter {
-				includeGroup "maven.modrinth"
-			}
-		}
-
-		exclusiveContent {
-			forRepository {
-				maven {
-					name = "CurseMaven"
-					url = "https://www.cursemaven.com"
-				}
-			}
-
-			filter {
-				includeGroup "curse.maven"
-			}
-		}
-	}
-
-	tasks.withType(JavaCompile).configureEach {
-		it.options.encoding = "UTF-8"
-		it.options.release.set(javaVersion)
-	}
-
-	processResources {
-        filteringCharset "UTF-8"
-
-		def expandProps = [
-			"version"                       : version,
-			"maven_group_id"                : maven_group_id,
-			"mod_id"                        : mod_id,
-			"mod_display_name"              : mod_display_name,
-			"mod_description"               : mod_description,
-			"sources_url"                   : sources_url,
-            "issues_url"                    : issues_url,
-			"license_url"					: license_url,
-			"discord_url"                   : discord_url,
-			"homepage_url"                  : homepage_url,
-			"minecraft_version"             : libs.versions.minecraft.get(),
-			"curseforge_id"					: curseforge_id,
-			"modrinth_id"					: modrinth_id,
-
-			"java_version"                  : javaVersion,
-			"fabric_loader_version"         : fabric.versions.fabric.loader.get(),
-		]
-
-		filesMatching(['pack.mcmeta', '*.mod.json', 'META-INF/mods.toml', '*.mixins.json']) {
-			expand expandProps
-		}
-		inputs.properties(expandProps)
-	}
-
-    publishing {
-        publications {
-            "mavenJava${project.name}"(MavenPublication) {
-				artifactId "${rootProject.name}-${project.name}"
-				from components.java
-			}
+        filter {
+            includeGroup "curse.maven"
         }
     }
 }
 
+dependencies {
+    minecraft libs.minecraft
+    mappings(loom.layered {
+        it.officialMojangMappings()
+        it.parchment("org.parchmentmc.data:parchment-${libs.versions.parchment.minecraft.get()}:${libs.versions.parchment.mappings.get()}@zip")
+    })
+
+    modImplementation libs.fabric.loader
+    modImplementation(libs.fabric.api) {
+        exclude group: "net.fabricmc", module: "fabric-loader"
+    }
+
+    compileOnly libs.jetbrains.annotations
+
+    modImplementation libs.bundles.icarus
+
+    modImplementation libs.bundles.origins
+
+    modCompileOnly libs.modmenu
+    modLocalRuntime libs.modmenu
+
+    modLocalRuntime libs.emi
+}
+
+base {
+    archivesName = "${project.name}-Fabric"
+}
+
+loom {
+    mods {
+        "${mod_id}" {
+            // Tell Loom about each source set used by your mod here. This ensures that your mod's classes are properly transformed by Loader.
+            sourceSet("main")
+        }
+    }
+    mixin {
+        useLegacyMixinAp = false
+    }
+
+    runs {
+        configureEach {
+            it.property('mixin.debug', 'true')
+        }
+
+        client {
+            client()
+            setConfigName("Fabric Client")
+            ideConfigGenerated(true)
+            runDir("run")
+
+            if (rootProject.hasProperty('mc_uuid')) {
+                programArgs("--uuid", rootProject.mc_uuid)
+            }
+
+            if (rootProject.hasProperty('mc_username')) {
+                programArgs("--username", rootProject.mc_username)
+            }
+
+            if (rootProject.hasProperty('mc_java_agent_path')) {
+                vmArg("-javaagent:${rootProject.mc_java_agent_path}")
+            }
+        }
+
+        server {
+            server()
+            setConfigName("Fabric Server")
+            ideConfigGenerated(true)
+            runDir("run/server")
+        }
+    }
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(javaVersion)
+    }
+    withSourcesJar()
+//        withJavadocJar()
+}
+
+javadoc {
+    options.tags = ["reason"]
+}
+
+jar {
+    from(project.file("LICENSE.md")) {
+        rename "LICENSE.md", "LICENSE_${mod_id}.md"
+    }
+    manifest {
+        attributes([
+                'Specification-Title'     : project.name,
+                'Specification-Version'   : project.version,
+                'Implementation-Title'    : "${project.name}-Fabric",
+                'Maven-Artifact'          : "${maven_group_id}:${project.name}-Fabric:${project.version}",
+                'Implementation-Version'  : project.version,
+                'Implementation-Timestamp': NOW.format("yyyy-MM-dd'T'HH:mm:ssZ"),
+                'Timestamp'               : NOW.toInstant().toEpochMilli(),
+                'Built-On-Java'           : "${System.getProperty('java.vm.version')} (${System.getProperty('java.vm.vendor')})",
+                'Built-On-Minecraft'      : libs.versions.minecraft.get()
+        ])
+    }
+}
+
+sourcesJar {
+    from(project.file("LICENSE.md")) {
+        rename "LICENSE.md", "LICENSE_${mod_id}.md"
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    it.options.release.set(javaVersion)
+}
+
+processResources {
+    filteringCharset "UTF-8"
+
+    def expandProps = [
+            "version"              : version,
+            "maven_group_id"       : maven_group_id,
+            "mod_id"               : mod_id,
+            "mod_display_name"     : mod_display_name,
+            "mod_description"      : mod_description,
+            "sources_url"          : sources_url,
+            "issues_url"           : issues_url,
+            "license_url"          : license_url,
+            "discord_url"          : discord_url,
+            "homepage_url"         : homepage_url,
+            "minecraft_version"    : libs.versions.minecraft.get(),
+            "curseforge_id"        : curseforge_id,
+            "modrinth_id"          : modrinth_id,
+
+            "java_version"         : javaVersion,
+            "fabric_loader_version": libs.versions.fabric.loader.get(),
+    ]
+
+    filesMatching(['pack.mcmeta', 'fabric.mod.json', '*.mixins.json']) {
+        expand expandProps
+    }
+    inputs.properties(expandProps)
+}
+
 publishing {
+    publications {
+        "mavenJava${project.name}"(MavenPublication) {
+            artifactId "${rootProject.name}-Fabric"
+            from components.java
+        }
+    }
+
     repositories {
         if (ENV.MAVEN_UPLOAD_URL) {
             maven {
@@ -229,8 +274,8 @@ publishing {
 
 // IDEA no longer automatically downloads sources/javadoc jars for dependencies, so we need to explicitly enable the behavior.
 idea {
-	module {
-		downloadSources = true
-		downloadJavadoc = true
-	}
+    module {
+        downloadSources = true
+        downloadJavadoc = true
+    }
 }
