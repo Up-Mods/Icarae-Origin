@@ -19,19 +19,19 @@ dependencies {
     annotationProcessor libs.mixinextras.common
 
     modImplementation libs.icarus.forge
-    modImplementation forge.curios
-    modImplementation forge.caelus
+    modImplementation libs.curios.forge
+    modImplementation libs.caelus.forge
     modImplementation libs.resourcefulconfig.forge
     modImplementation libs.commonnetworking.forge
 
-    modImplementation forge.bundles.origins
+    modImplementation libs.bundles.origins.forge
 
     compileOnly libs.mixinextras.common
     modImplementation libs.mixinextras.forge
 }
 
 legacyForge {
-    version = "${libs.versions.minecraft.get()}-${forge.versions.forge.get()}"
+    version = "${libs.versions.minecraft.get()}-${libs.versions.forge.get()}"
 
     parchment {
         minecraftVersion = libs.versions.parchment.minecraft.get()

@@ -1,0 +1,118 @@
+[versions]
+minecraft = "1.20.1"
+
+# The latest versions are available at https://parchmentmc.org/docs/getting-started
+parchment_minecraft = "1.20.1"
+parchment_mappings = "2023.09.03"
+
+# https://projects.neoforged.net/neoforged/moddevgradle
+moddevgradle_legacy = "2.0.140"
+
+# Forge
+forge = "47.4.16"
+
+# Fabric
+# https://fabricmc.net/develop
+fabric_loom = "1.14.10" # https://maven.fabricmc.net/fabric-loom/fabric-loom.gradle.plugin
+fabric_loader = "0.18.4"
+fabric_api = "0.92.7+1.20.1"
+
+# Minecraft dependencies
+jetbrains_annotations = "26.0.2-1"
+mixin = "0.8.5"
+mixinextras = "0.5.3"
+asm = "9.6"
+
+commonnetworking = "1.0.3-1.20.1"
+resourcefulconfig = "2.1.2"
+# https://modrinth.com/mod/emi/versions
+emi = "1.1.22+1.20.1"
+icarus = "2.13.1"
+# https://modrinth.com/mod/modmenu/versions
+modmenu = "7.2.2"
+
+curios_forge = "5.9.0+1.20.1"
+caelus_forge = "3.2.0+1.20.1"
+
+origins_fabric = "v1.10.0"
+origins_forge = "1.20.1-1.10.0.9"
+
+apoli_fabric = "v2.9.0"
+apoli_forge = "1.20.1-2.9.0.8"
+
+calio_fabric = "v1.11.0"
+calio_forge = "1.20.1-1.11.0.5"
+
+additional_entity_attributes_fabric = "89b98f4"
+reach_entity_attributes_fabric = "2.4.0"
+playerabilitylib_fabric = "1.8.0"
+cloth_fabric = "11.1.118"
+cca_fabric = "5.2.3"
+
+[libraries]
+# Fabric
+fabric_loader = { module = "net.fabricmc:fabric-loader", version.ref = "fabric_loader" }
+fabric_api = { module = "net.fabricmc.fabric-api:fabric-api", version.ref = "fabric_api" }
+
+# Minecraft dependencies
+minecraft = { module = "com.mojang:minecraft", version.ref = "minecraft" }
+mixin = { module = "org.spongepowered:mixin", version.ref = "mixin" }
+mixinextras_common = { module = "io.github.llamalad7:mixinextras-common", version.ref = "mixinextras" }
+mixinextras_forge = { module = "io.github.llamalad7:mixinextras-forge", version.ref = "mixinextras" }
+asm = { module = "org.ow2.asm:asm", version.ref = "asm" }
+asm_analysis = { module = "org.ow2.asm:asm-analysis", version.ref = "asm" }
+asm_commons = { module = "org.ow2.asm:asm-commons", version.ref = "asm" }
+asm_tree = { module = "org.ow2.asm:asm-tree", version.ref = "asm" }
+asm_util = { module = "org.ow2.asm:asm-util", version.ref = "asm" }
+jetbrains_annotations = { module = "org.jetbrains:annotations", version.ref = "jetbrains_annotations" }
+
+icarus = { module = "dev.cammiescorner.icarus:Icarus-Common", version.ref = "icarus" }
+icarus_fabric = { module = "dev.cammiescorner.icarus:Icarus-Fabric", version.ref = "icarus" }
+icarus_forge = { module = "dev.cammiescorner.icarus:Icarus-Forge", version.ref = "icarus" }
+
+resourcefulconfig = { module = "com.teamresourceful.resourcefulconfig:resourcefulconfig-common-1.20.1", version.ref = "resourcefulconfig" }
+resourcefulconfig_fabric = { module = "com.teamresourceful.resourcefulconfig:resourcefulconfig-fabric-1.20.1", version.ref = "resourcefulconfig" }
+resourcefulconfig_forge = { module = "com.teamresourceful.resourcefulconfig:resourcefulconfig-forge-1.20.1", version.ref = "resourcefulconfig" }
+
+commonnetworking = { module = "mysticdrew:common-networking-common", version.ref = "commonnetworking" }
+commonnetworking_fabric = { module = "mysticdrew:common-networking-fabric", version.ref = "commonnetworking" }
+commonnetworking_forge = { module = "mysticdrew:common-networking-forge", version.ref = "commonnetworking" }
+
+emi = { module = "dev.emi:emi-xplat-mojmap", version.ref = "emi" }
+emi_forge = { module = "dev.emi:emi-forge", version.ref = "emi" }
+emi_fabric = { module = "dev.emi:emi-fabric", version.ref = "emi" }
+
+modmenu_fabric = { module = "com.terraformersmc:modmenu", version.ref = "modmenu" }
+
+curios_forge = { module = "top.theillusivec4.curios:curios-forge", version.ref = "curios_forge" }
+
+caelus_forge = { module = "top.theillusivec4.caelus:caelus-forge", version.ref = "caelus_forge" }
+
+origins_fabric = { module = "com.github.apace100:origins-fabric", version.ref = "origins_fabric" }
+origins_forge = { module = "io.github.edwinmindcraft:origins-forge", version.ref = "origins_forge" }
+
+apoli_fabric = { module = "com.github.apace100:apoli", version.ref = "apoli_fabric" }
+apoli_forge = { module = "io.github.edwinmindcraft:apoli-forge", version.ref = "apoli_forge" }
+
+calio_fabric = { module = "com.github.apace100:calio", version.ref = "calio_fabric" }
+calio_forge = { module = "io.github.edwinmindcraft:calio-forge", version.ref = "calio_forge" }
+
+additional_entity_attributes_fabric = { module = "com.github.DaFuqs:AdditionalEntityAttributes", version.ref = "additional_entity_attributes_fabric" }
+
+reach_entity_attributes_fabric = { module = "com.jamieswhiteshirt:reach-entity-attributes", version.ref = "reach_entity_attributes_fabric" }
+
+playerabilitylib_fabric = { module = "io.github.ladysnake:PlayerAbilityLib", version.ref = "playerabilitylib_fabric" }
+
+cloth_fabric = { module = "me.shedaniel.cloth:cloth-config-fabric", version.ref = "cloth_fabric" }
+
+cca_base_fabric = { module = "dev.onyxstudios.cardinal-components-api:cardinal-components-base", version.ref = "cca_fabric" }
+cca_entity_fabric = { module = "dev.onyxstudios.cardinal-components-api:cardinal-components-entity", version.ref = "cca_fabric" }
+
+[bundles]
+mixin = ["mixin", "mixinextras_common", "asm", "asm_analysis", "asm_commons", "asm_tree", "asm_util"]
+origins_fabric = ["origins_fabric", "apoli_fabric", "calio_fabric", "additional_entity_attributes_fabric", "reach_entity_attributes_fabric", "playerabilitylib_fabric", "cloth_fabric", "cca_base_fabric", "cca_entity_fabric"]
+origins_forge = ["origins_forge", "apoli_forge", "calio_forge"]
+
+[plugins]
+moddevgradle_legacy = { id = "net.neoforged.moddev.legacyforge", version.ref = "moddevgradle_legacy" }
+fabric_loom_remap = { id = "net.fabricmc.fabric-loom-remap", version.ref = "fabric_loom" }

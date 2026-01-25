@@ -1,5 +1,5 @@
 plugins {
-    alias fabric.plugins.loom
+    alias libs.plugins.fabric.loom.remap
 }
 
 dependencies {
@@ -9,8 +9,8 @@ dependencies {
         it.parchment("org.parchmentmc.data:parchment-${libs.versions.parchment.minecraft.get()}:${libs.versions.parchment.mappings.get()}@zip")
     })
 
-    modImplementation fabric.fabric.loader
-    modImplementation (fabric.fabric.api) {
+    modImplementation libs.fabric.loader
+    modImplementation (libs.fabric.api) {
         exclude group: "net.fabricmc", module: "fabric-loader"
     }
 
@@ -23,14 +23,14 @@ dependencies {
     }
     modImplementation libs.commonnetworking.fabric
 
-    modImplementation(fabric.bundles.origins) {
+    modImplementation(libs.bundles.origins.fabric) {
         transitive = false
     }
 
-    modCompileOnly (fabric.modmenu) {
+    modCompileOnly (libs.modmenu.fabric) {
         exclude group: "net.fabricmc"
     }
-    modLocalRuntime (fabric.modmenu) {
+    modLocalRuntime (libs.modmenu.fabric) {
         exclude group: "net.fabricmc"
     }
 }
@@ -40,10 +40,8 @@ loom {
         "${mod_id}" {
             // Tell Loom about each source set used by your mod here. This ensures that your mod's classes are properly transformed by Loader.
             sourceSet("main")
+            project(":Common").sourceSets.main
         }
-    }
-    mixin {
-        useLegacyMixinAp = false
     }
 
     runs {

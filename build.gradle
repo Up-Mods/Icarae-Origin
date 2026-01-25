@@ -194,7 +194,7 @@ subprojects {
 			"modrinth_id"					: modrinth_id,
 
 			"java_version"                  : javaVersion,
-			"fabric_loader_version"         : fabric.versions.fabric.loader.get(),
+			"fabric_loader_version"         : libs.versions.fabric.loader.get(),
 		]
 
 		filesMatching(['pack.mcmeta', '*.mod.json', 'META-INF/mods.toml', '*.mixins.json']) {
