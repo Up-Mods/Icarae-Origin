@@ -203,14 +203,16 @@ subprojects {
 		inputs.properties(expandProps)
 	}
 
-    publishing {
-        publications {
-            "mavenJava${project.name}"(MavenPublication) {
-				artifactId "${rootProject.name}-${project.name}"
-				from components.java
+	if (!project.name.contains("/")) {
+		publishing {
+			publications {
+				"mavenJava${project.name}"(MavenPublication) {
+					artifactId "${rootProject.name}-${project.name}"
+					from components.java
+				}
 			}
-        }
-    }
+		}
+	}
 }
 
 publishing {

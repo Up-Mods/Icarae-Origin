@@ -8,6 +8,9 @@ parchment_mappings = "2023.09.03"
 # https://projects.neoforged.net/neoforged/moddevgradle
 moddevgradle_legacy = "2.0.140"
 
+# https://maven.architectury.dev/dev/architectury/loom/dev.architectury.loom.gradle.plugin
+archictectury_loom = "1.13.467"
+
 # Forge
 forge = "47.4.16"
 
@@ -116,3 +119,4 @@ origins_forge = ["origins_forge", "apoli_forge", "calio_forge"]
 [plugins]
 moddevgradle_legacy = { id = "net.neoforged.moddev.legacyforge", version.ref = "moddevgradle_legacy" }
 fabric_loom_remap = { id = "net.fabricmc.fabric-loom-remap", version.ref = "fabric_loom" }
+architectury_loom = { id = "dev.architectury.loom", version.ref = "archictectury_loom" }
