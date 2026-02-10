@@ -14,9 +14,12 @@ archictectury_loom = "1.13.467"
 # Forge
 forge = "47.4.16"
 
+# https://maven.su5ed.dev/#/releases/org/sinytra/Connector
+connector = "1.0.0-beta.48+1.20.1"
+
 # Fabric
 # https://fabricmc.net/develop
-fabric_loom = "1.14.10" # https://maven.fabricmc.net/fabric-loom/fabric-loom.gradle.plugin
+fabric_loom = "1.15.3" # https://maven.fabricmc.net/fabric-loom/fabric-loom.gradle.plugin
 fabric_loader = "0.18.4"
 fabric_api = "0.92.7+1.20.1"
 
@@ -69,6 +72,8 @@ asm_tree = { module = "org.ow2.asm:asm-tree", version.ref = "asm" }
 asm_util = { module = "org.ow2.asm:asm-util", version.ref = "asm" }
 jetbrains_annotations = { module = "org.jetbrains:annotations", version.ref = "jetbrains_annotations" }
 
+connector = { module = "org.sinytra:Connector", version.ref = "connector" }
+
 icarus = { module = "dev.cammiescorner.icarus:Icarus-Common", version.ref = "icarus" }
 icarus_fabric = { module = "dev.cammiescorner.icarus:Icarus-Fabric", version.ref = "icarus" }
 icarus_forge = { module = "dev.cammiescorner.icarus:Icarus-Forge", version.ref = "icarus" }
@@ -119,4 +124,5 @@ origins_forge = ["origins_forge", "apoli_forge", "calio_forge"]
 [plugins]
 moddevgradle_legacy = { id = "net.neoforged.moddev.legacyforge", version.ref = "moddevgradle_legacy" }
 fabric_loom_remap = { id = "net.fabricmc.fabric-loom-remap", version.ref = "fabric_loom" }
+fabric_loom_repositories = { id = "net.fabricmc.fabric-loom-repositories", version.ref = "fabric_loom" }
 architectury_loom = { id = "dev.architectury.loom", version.ref = "archictectury_loom" }

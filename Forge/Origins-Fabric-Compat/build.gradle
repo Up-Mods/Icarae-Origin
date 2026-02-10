@@ -1,0 +1,38 @@
+plugins {
+    alias(libs.plugins.moddevgradle.legacy)
+    alias(libs.plugins.fabric.loom.repositories)
+}
+
+dependencies {
+    compileOnly project(":Common")
+    compileOnly project(path: ":Forge:Origins-Fabric-Deobf", configuration: "modRuntimeClasspathMainMapped")
+
+    modImplementation libs.icarus.forge
+    modImplementation libs.curios.forge
+    modImplementation libs.caelus.forge
+    modImplementation libs.resourcefulconfig.forge
+    modImplementation libs.commonnetworking.forge
+
+    compileOnly libs.mixinextras.common
+    modImplementation libs.mixinextras.forge
+}
+
+legacyForge {
+    version = "${libs.versions.minecraft.get()}-${libs.versions.forge.get()}"
+
+    mods {
+        // define mod <-> source bindings
+        // these are used to tell the game which sources are for which mod
+        // mostly optional in a single mod project
+        // but multi mod projects should define one per mod
+        "${mod_id}" {
+            sourceSet(sourceSets.main)
+            sourceSet(project(":Common").sourceSets.main)
+        }
+    }
+
+    parchment {
+        minecraftVersion = libs.versions.parchment.minecraft.get()
+        mappingsVersion = libs.versions.parchment.mappings.get()
+    }
+}

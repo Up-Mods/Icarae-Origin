@@ -26,4 +26,4 @@ plugins {
 
 rootProject.name = 'Icarae-Origin'
 
-include 'Common', 'Fabric', 'Forge', 'Forge:Connector-Deobf'
+include 'Common', 'Fabric', 'Forge', ':Forge:Origins-Fabric-Deobf', ':Forge:Origins-Fabric-Compat'

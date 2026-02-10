@@ -1,5 +1,6 @@
 plugins {
-    alias libs.plugins.moddevgradle.legacy
+    alias(libs.plugins.moddevgradle.legacy)
+    alias(libs.plugins.fabric.loom.repositories)
 }
 
 // Sets up a dependency configuration called 'localRuntime' and a deobfuscating one called 'modLocalRuntime'
@@ -15,6 +16,7 @@ obfuscation {
 
 dependencies {
     compileOnly project(":Common")
+    compileOnly project(":Forge:Origins-Fabric-Compat")
     annotationProcessor variantOf(libs.mixin) { classifier 'processor' }
     annotationProcessor libs.mixinextras.common
 
@@ -29,7 +31,7 @@ dependencies {
     compileOnly libs.mixinextras.common
     modImplementation libs.mixinextras.forge
 
-    compileOnly project(path: ":Forge:Connector-Deobf", configuration: "modRuntimeClasspathMainMapped")
+    modCompileOnly libs.connector
 }
 
 legacyForge {
@@ -85,12 +87,14 @@ legacyForge {
         "${mod_id}" {
             sourceSet(sourceSets.main)
             sourceSet(project(":Common").sourceSets.main)
+            sourceSet(project(":Forge:Origins-Fabric-Compat").sourceSets.main)
         }
     }
 }
 
 mixin {
     add(sourceSets.main, "${mod_id}.refmap.json")
+    add(project(":Forge:Origins-Fabric-Compat").sourceSets.main, "${mod_id}.refmap.json")
 
     config("${mod_id}.forge.mixins.json")
 }
@@ -105,16 +109,20 @@ sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 tasks.named("compileJava", JavaCompile) {
     source(project(":Common").sourceSets.main.allJava)
+    source(project(":Forge:Origins-Fabric-Compat").sourceSets.main.allJava)
 }
 
 tasks.named("javadoc", Javadoc) {
     source(project(":Common").sourceSets.main.allJava)
+    source(project(":Forge:Origins-Fabric-Compat").sourceSets.main.allJava)
 }
 
 tasks.named("sourcesJar", Jar) {
     from(project(":Common").sourceSets.main.allSource)
+    from(project(":Forge:Origins-Fabric-Compat").sourceSets.main.allSource)
 }
 
 processResources {
     from project(":Common").sourceSets.main.resources
+    from project(":Forge:Origins-Fabric-Compat").sourceSets.main.resources
 }
