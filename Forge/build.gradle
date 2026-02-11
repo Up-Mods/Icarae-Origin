@@ -8,7 +8,13 @@ plugins {
 // a dependency that will be present for runtime testing but that is
 // "optional", meaning it will not be pulled by dependents of this mod.
 configurations {
-    runtimeClasspath.extendsFrom localRuntime
+    dependencyScope("localRuntime") {
+        runtimeClasspath.extendsFrom(it)
+    }
+    dependencyScope("merge")
+    resolvable("mergeFiles") {
+        extendsFrom(merge)
+    }
 }
 obfuscation {
     createRemappingConfiguration(configurations.localRuntime)
@@ -17,6 +23,7 @@ obfuscation {
 dependencies {
     compileOnly project(":Common")
     compileOnly project(":Forge:Origins-Fabric-Compat")
+    compileOnly project(path: ":Forge:Origins-Fabric-Deobf", configuration: "modRuntimeClasspathMainMapped")
 
     annotationProcessor variantOf(libs.mixin) { classifier 'processor' }
     annotationProcessor libs.mixinextras.common
@@ -33,6 +40,8 @@ dependencies {
     modImplementation libs.mixinextras.forge
 
     modCompileOnly libs.connector
+
+    merge(project(path: ":Forge:Origins-Fabric-Compat", configuration: "export"))
 }
 
 legacyForge {
@@ -105,7 +114,9 @@ jar {
             "MixinConfigs": "${mod_id}.forge.mixins.json"
     ])
 
-    from(zipTree(project(":Forge:Origins-Fabric-Compat").tasks.jar))
+    configurations.mergeFiles.files.each {
+        from(zipTree(it))
+    }
 }
 
 sourceSets.main.resources { srcDir 'src/generated/resources' }

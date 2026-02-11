@@ -36,3 +36,9 @@ legacyForge {
         mappingsVersion = libs.versions.parchment.mappings.get()
     }
 }
+
+configurations {
+    consumable("export") {
+        outgoing.artifact(jar)
+    }
+}
