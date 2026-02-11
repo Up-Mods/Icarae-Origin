@@ -2,8 +2,7 @@ package dev.upcraft.origins.icarae.forge.mixin.client.compat.origins_fabric;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import dev.cammiescorner.icarus.client.IcarusClient;
-import dev.upcraft.origins.icarae.forge.compat.origins_fabric.power.WingsPower;
-import io.github.apace100.apoli.component.PowerHolderComponent;
+import dev.upcraft.origins.icarae.forge.compat.origins_fabric.util.IcaraeCompatMixinHooksClient;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
@@ -15,9 +14,9 @@ public class IcarusClientMixin {
     @ModifyReturnValue(method = "getWingsForRendering", at = @At(value = "RETURN"))
     private static ItemStack injectOriginWings(ItemStack original, LivingEntity entity) {
         if(original.isEmpty()) {
-            var list = PowerHolderComponent.getPowers(entity, WingsPower.class);
-            if (!list.isEmpty()) {
-                return list.get(0).getWingsType();
+            var override = IcaraeCompatMixinHooksClient.getRenderWingsOverride(entity);
+            if(override != null) {
+                return override;
             }
         }
 

@@ -17,6 +17,7 @@ obfuscation {
 dependencies {
     compileOnly project(":Common")
     compileOnly project(":Forge:Origins-Fabric-Compat")
+
     annotationProcessor variantOf(libs.mixin) { classifier 'processor' }
     annotationProcessor libs.mixinextras.common
 
@@ -103,13 +104,14 @@ jar {
     manifest.attributes([
             "MixinConfigs": "${mod_id}.forge.mixins.json"
     ])
+
+    from(zipTree(project(":Forge:Origins-Fabric-Compat").tasks.jar))
 }
 
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 tasks.named("compileJava", JavaCompile) {
     source(project(":Common").sourceSets.main.allJava)
-    source(project(":Forge:Origins-Fabric-Compat").sourceSets.main.allJava)
 }
 
 tasks.named("javadoc", Javadoc) {
@@ -124,5 +126,4 @@ tasks.named("sourcesJar", Jar) {
 
 processResources {
     from project(":Common").sourceSets.main.resources
-    from project(":Forge:Origins-Fabric-Compat").sourceSets.main.resources
 }
