@@ -1,5 +1,6 @@
 plugins {
-    alias libs.plugins.moddevgradle.legacy
+    alias(libs.plugins.moddevgradle.legacy)
+    alias(libs.plugins.fabric.loom.repositories)
 }
 
 // Sets up a dependency configuration called 'localRuntime' and a deobfuscating one called 'modLocalRuntime'
@@ -7,7 +8,13 @@ plugins {
 // a dependency that will be present for runtime testing but that is
 // "optional", meaning it will not be pulled by dependents of this mod.
 configurations {
-    runtimeClasspath.extendsFrom localRuntime
+    dependencyScope("localRuntime") {
+        runtimeClasspath.extendsFrom(it)
+    }
+    dependencyScope("merge")
+    resolvable("mergeFiles") {
+        extendsFrom(merge)
+    }
 }
 obfuscation {
     createRemappingConfiguration(configurations.localRuntime)
@@ -15,6 +22,9 @@ obfuscation {
 
 dependencies {
     compileOnly project(":Common")
+    compileOnly project(":Forge:Origins-Fabric-Compat")
+    compileOnly project(path: ":Forge:Origins-Fabric-Deobf", configuration: "modRuntimeClasspathMainMapped")
+
     annotationProcessor variantOf(libs.mixin) { classifier 'processor' }
     annotationProcessor libs.mixinextras.common
 
@@ -28,6 +38,10 @@ dependencies {
 
     compileOnly libs.mixinextras.common
     modImplementation libs.mixinextras.forge
+
+    modCompileOnly libs.connector
+
+    merge(project(path: ":Forge:Origins-Fabric-Compat", configuration: "export"))
 }
 
 legacyForge {
@@ -83,12 +97,14 @@ legacyForge {
         "${mod_id}" {
             sourceSet(sourceSets.main)
             sourceSet(project(":Common").sourceSets.main)
+            sourceSet(project(":Forge:Origins-Fabric-Compat").sourceSets.main)
         }
     }
 }
 
 mixin {
     add(sourceSets.main, "${mod_id}.refmap.json")
+    add(project(":Forge:Origins-Fabric-Compat").sourceSets.main, "${mod_id}.refmap.json")
 
     config("${mod_id}.forge.mixins.json")
 }
@@ -97,6 +113,11 @@ jar {
     manifest.attributes([
             "MixinConfigs": "${mod_id}.forge.mixins.json"
     ])
+
+    from(zipTree(configurations.mergeFiles.singleFile)) {
+        duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    }
+    dependsOn(configurations.mergeFiles)
 }
 
 sourceSets.main.resources { srcDir 'src/generated/resources' }
@@ -107,10 +128,12 @@ tasks.named("compileJava", JavaCompile) {
 
 tasks.named("javadoc", Javadoc) {
     source(project(":Common").sourceSets.main.allJava)
+    source(project(":Forge:Origins-Fabric-Compat").sourceSets.main.allJava)
 }
 
 tasks.named("sourcesJar", Jar) {
     from(project(":Common").sourceSets.main.allSource)
+    from(project(":Forge:Origins-Fabric-Compat").sourceSets.main.allSource)
 }
 
 processResources {

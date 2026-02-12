@@ -1,0 +1,17 @@
+plugins {
+    alias(libs.plugins.fabric.loom.remap)
+}
+
+dependencies {
+    minecraft libs.minecraft
+    mappings(loom.layered {
+        it.officialMojangMappings()
+        it.parchment("org.parchmentmc.data:parchment-${libs.versions.parchment.minecraft.get()}:${libs.versions.parchment.mappings.get()}@zip")
+    })
+
+    modImplementation(libs.bundles.origins.fabric) {
+        transitive = false
+    }
+
+    compileOnly(project(":Common"))
+}

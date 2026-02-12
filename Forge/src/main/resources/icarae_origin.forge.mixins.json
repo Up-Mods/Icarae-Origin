@@ -3,14 +3,17 @@
   "minVersion": "0.8",
   "package": "dev.upcraft.origins.icarae.forge.mixin",
   "refmap": "${mod_id}.refmap.json",
+  "plugin": "dev.upcraft.origins.icarae.forge.IcaraeOriginForgeMixinConfig",
   "compatibilityLevel": "JAVA_${java_version}",
   "mixins": [
-    "IcarusHelperMixin"
+    "IcarusHelperMixin",
+    "compat.origins_fabric.IcarusHelperMixin"
   ],
   "injectors": {
     "defaultRequire": 1
   },
   "client": [
-    "client.IcarusClientMixin"
+    "client.IcarusClientMixin",
+    "client.compat.origins_fabric.IcarusClientMixin"
   ]
 }

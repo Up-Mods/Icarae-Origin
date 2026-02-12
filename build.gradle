@@ -1,6 +1,9 @@
 plugins {
     id 'idea'
     id 'maven-publish'
+	alias(libs.plugins.moddevgradle.legacy) apply false
+	alias(libs.plugins.fabric.loom.remap) apply false
+	alias(libs.plugins.fabric.loom.repositories) apply false
 }
 
 def javaVersion = 17
@@ -143,6 +146,11 @@ subprojects {
 			url = "https://maven.theillusivec4.top"
 		}
 
+		maven {
+			name = "Sinytra"
+			url = "https://maven.su5ed.dev/releases"
+		}
+
 		exclusiveContent {
 			forRepository {
 				maven {
@@ -203,14 +211,16 @@ subprojects {
 		inputs.properties(expandProps)
 	}
 
-    publishing {
-        publications {
-            "mavenJava${project.name}"(MavenPublication) {
-				artifactId "${rootProject.name}-${project.name}"
-				from components.java
+	if (!project.name.contains("/") && !project.name.contains("Origins-Fabric")) {
+		publishing {
+			publications {
+				"mavenJava${project.name}"(MavenPublication) {
+					artifactId "${rootProject.name}-${project.name}"
+					from components.java
+				}
 			}
-        }
-    }
+		}
+	}
 }
 
 publishing {
