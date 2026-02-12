@@ -211,7 +211,7 @@ subprojects {
 		inputs.properties(expandProps)
 	}
 
-	if (!project.name.contains("/")) {
+	if (!project.name.contains("/") && !project.name.contains("Origins-Fabric")) {
 		publishing {
 			publications {
 				"mavenJava${project.name}"(MavenPublication) {

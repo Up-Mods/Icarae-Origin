@@ -114,9 +114,10 @@ jar {
             "MixinConfigs": "${mod_id}.forge.mixins.json"
     ])
 
-    configurations.mergeFiles.files.each {
-        from(zipTree(it))
+    from(zipTree(configurations.mergeFiles.singleFile)) {
+        duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     }
+    dependsOn(configurations.mergeFiles)
 }
 
 sourceSets.main.resources { srcDir 'src/generated/resources' }
