@@ -6,7 +6,7 @@ on:
       - '*'
 
 env:
-  JAVA_VERSION: 21
+  JAVA_VERSION: 25
   TAG: ${{ github.ref_name }}
   BUILD_NUMBER: ${{ github.run_number }}
   MAVEN_UPLOAD_URL: ${{ secrets.MAVEN_UPLOAD_URL }}
