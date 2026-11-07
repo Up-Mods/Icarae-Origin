@@ -151,33 +151,19 @@ loom {
 
     runs {
         configureEach {
-            it.property('mixin.debug', 'true')
+            systemProperties['mixin.debug'] = 'true'
         }
 
         client {
-            client()
-            setConfigName("Fabric Client")
-            ideConfigGenerated(true)
-            runDir("run")
-
-            if (rootProject.hasProperty('mc_uuid')) {
-                programArgs("--uuid", rootProject.mc_uuid)
-            }
-
-            if (rootProject.hasProperty('mc_username')) {
-                programArgs("--username", rootProject.mc_username)
-            }
-
-            if (rootProject.hasProperty('mc_java_agent_path')) {
-                vmArg("-javaagent:${rootProject.mc_java_agent_path}")
-            }
+            displayName = "Fabric Client"
+            generateRunConfig = true
+            runDirectory = file("run")
         }
 
         server {
-            server()
-            setConfigName("Fabric Server")
-            ideConfigGenerated(true)
-            runDir("run/server")
+            displayName = "Fabric Server"
+            generateRunConfig = true
+            runDirectory = file("run/server")
         }
     }
 }
@@ -224,7 +210,7 @@ tasks.withType(JavaCompile).configureEach {
 }
 
 processResources {
-    filteringCharset "UTF-8"
+    filteringCharset = "UTF-8"
 
     def expandProps = [
             "version"              : version,
@@ -254,7 +240,6 @@ processResources {
 publishing {
     publications {
         "mavenJava${project.name}"(MavenPublication) {
-            artifactId "${rootProject.name}-Fabric"
             from components.java
         }
     }

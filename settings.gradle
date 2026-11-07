@@ -31,4 +31,4 @@ buildCache {
     }
 }
 
-rootProject.name = 'Icarae-Origin'
+rootProject.name = 'Icarae-Origin-Fabric'

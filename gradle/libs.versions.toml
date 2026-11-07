@@ -1,6 +1,6 @@
 [versions]
-# The latest versions are available at https://fabricmc.net/develop/
-loom = "1.10.1"
+# The latest versions are available at https://maven.fabricmc.net/net/fabricmc/fabric-loom-remap/net.fabricmc.fabric-loom-remap.gradle.plugin/
+loom = "1.19.4"
 
 minecraft = "1.21.1"
 
@@ -8,25 +8,26 @@ minecraft = "1.21.1"
 parchment_minecraft = "1.21.1"
 parchment_mappings = "2024.11.17"
 
-fabric_loader = "0.16.10"
-fabric_api = "0.115.0+1.21.1"
+# # The latest versions are available at https://fabricmc.net/develop/
+fabric_loader = "0.20.1"
+fabric_api = "0.116.17+1.21.1"
 
 jetbrains_annotations = "26.0.2"
 
-icarus = "4.3.1"
-sparkweave = "0.507.0"
-commonnetworking = "1.0.18-1.21.1"
-resourcefulconfig = "3.0.9"
+icarus = "4.8.0"
+sparkweave = "0.510.0"
+commonnetworking = "1.0.21-1.21.1"
+resourcefulconfig = "3.0.11"
 trinkets = "3.10.0"
 
-origins = "1.13.0-alpha.12+mc.1.21.1"
-apoli = "2.12.0-alpha.15+mc.1.21.1"
+origins = "1.13.0-pre.4+mc.1.21.1"
+apoli = "2.12.0-pre.4+mc.1.21.1"
 cloth = "13.0.121"
-cca = "6.1.2"
+cca = "6.1.3"
 
-emi = "1.1.20+1.21.1"
+emi = "1.1.24+1.21.1"
 
-modmenu = "11.0.3"
+modmenu = "11.0.5"
 
 [libraries]
 minecraft = { module = "com.mojang:minecraft", version.ref = "minecraft" }
@@ -58,4 +59,4 @@ icarus = ["icarus", "sparkweave", "commonnetworking", "resourcefulconfig", "trin
 origins = ["origins", "apoli", "cloth", "cca-base", "cca-entity"]
 
 [plugins]
-loom = { id = "fabric-loom", version.ref = "loom" }
+loom = { id = "net.fabricmc.fabric-loom-remap", version.ref = "loom" }
